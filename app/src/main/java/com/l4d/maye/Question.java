@@ -1,8 +1,5 @@
 package com.l4d.maye;
 
-import android.provider.Settings;
-import android.util.Log;
-
 public class Question {
 
     private int ID;

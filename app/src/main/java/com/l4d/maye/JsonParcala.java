@@ -1,6 +1,5 @@
 package com.l4d.maye;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -50,12 +49,6 @@ public class JsonParcala {
         asyncRequestObject.execute(gelenElemanlar);
     }
 
-    public List<String> calistir(){
-        AsyncDataClass asyncRequestObject = new AsyncDataClass();
-        asyncRequestObject.execute(gelenElemanlar);
-
-        return liste;
-    }
 
     private class AsyncDataClass extends AsyncTask<List<String>, Void, String> {
 

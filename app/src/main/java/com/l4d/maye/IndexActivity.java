@@ -55,12 +55,9 @@ public class IndexActivity extends AppCompatActivity
 
     TextView numara, indexBaslik, indexIcerik;
     LinearLayout drop, processBox, tags, tags2;
-    private static final String href = "href";
     List<Parca> parcalar = new ArrayList<>();
     kontrol k;
-    String baslik;
-    String icerik;
-    String toplam,progSayac, yeniSayfa;
+    String toplam,progSayac, yeniSayfa,baslik,icerik;
     int id, sayac = 1;
     private final String serverUrl = "http://www.dijitaloyunzirvesi.com/android/adimGonder.php";
     /**

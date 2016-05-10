@@ -1,10 +1,7 @@
 package com.l4d.maye;
 
 import android.app.Activity;
-import android.os.StrictMode;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 public class ResultActivity extends Activity {
