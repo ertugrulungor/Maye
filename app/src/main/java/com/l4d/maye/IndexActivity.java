@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,6 +48,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -287,9 +289,16 @@ public class IndexActivity extends AppCompatActivity
                 ((LinearLayout) v.getParent()).removeView(v);
                 if (sayac > parcalar.size()) {
                     KontrolActivity.kontrolet = true;
-                    Intent i = new Intent(IndexActivity.this, IndexActivity.class);
-                    startActivity(i);
-                    finish();
+                    Toast.makeText(IndexActivity.this, "Doğru Cevap", Toast.LENGTH_SHORT).show();
+                    new Handler().postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(IndexActivity.this, IndexActivity.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    }, 1500);
+
                 }
             }
             return false;
@@ -322,14 +331,14 @@ public class IndexActivity extends AppCompatActivity
 
         private void ekle(String s) {
             TextView t = new TextView(IndexActivity.this);
-            t.setBackgroundResource(R.drawable.karepembe);
+            t.setBackground(null);
             int paddingPixel = 5;
             float density = IndexActivity.this.getResources().getDisplayMetrics().density;
             int paddingDp = (int) (paddingPixel * density);
-            t.setPadding(paddingDp, paddingDp, paddingDp, paddingDp);
+            t.setPadding(paddingDp, paddingDp, 0, paddingDp);
             t.setText(s);
             LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(0, 0, 15, 0);
+            lp.setMargins(0, 0, 2, 0);
             t.setLayoutParams(lp);
             t.setTextColor(Color.WHITE);
             drop.addView(t);
@@ -357,7 +366,7 @@ public class IndexActivity extends AppCompatActivity
                 nameValuePairs.add(new BasicNameValuePair("id", params[1]));
                 nameValuePairs.add(new BasicNameValuePair("session", params[2]));
                 nameValuePairs.add(new BasicNameValuePair("yenisayfa", params[3]));
-                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs));
+                httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs,"UTF-8"));
 
                 HttpResponse response = httpClient.execute(httpPost);
                 jsonResult = inputStreamToString(response.getEntity().getContent()).toString();
@@ -403,10 +412,10 @@ public class IndexActivity extends AppCompatActivity
         }
     }
 
-    private StringBuilder inputStreamToString(InputStream is) {
+    private StringBuilder inputStreamToString(InputStream is) throws UnsupportedEncodingException {
         String rLine = "";
         StringBuilder answer = new StringBuilder();
-        BufferedReader br = new BufferedReader(new InputStreamReader(is));
+        BufferedReader br = new BufferedReader(new InputStreamReader(is,"UTF-8"));
         try {
             while ((rLine = br.readLine()) != null) {
                 answer.append(rLine);
