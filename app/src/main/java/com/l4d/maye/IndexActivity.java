@@ -405,8 +405,30 @@ public class IndexActivity extends AppCompatActivity
                 Toast.makeText(IndexActivity.this, "yanlış id", Toast.LENGTH_LONG).show();
                 return;
             } else {
+                String newIcerik="", karakter;
+                char[] karakterler;
+                karakterler = icerik.toCharArray();
+                for(int i=0;i<karakterler.length;i++){
+                    if(karakterler[i] == '/')
+                        karakter = "ç";
+                    else if(karakterler[i] == '-')
+                        karakter = "ğ";
+                    else if(karakterler[i] == '*')
+                        karakter = "ı";
+                    else if(karakterler[i] == '%')
+                        karakter = "ö";
+                    else if(karakterler[i] == '&')
+                        karakter = "ş";
+                    else if(karakterler[i] == '^')
+                        karakter = "ü";
+                    else
+                        karakter = String.valueOf(karakterler[i]);
+
+                    newIcerik += karakter;
+                }
+
                 indexBaslik.setText(baslik);
-                indexIcerik.setText(icerik);
+                indexIcerik.setText(newIcerik);
                 numara.setText(progSayac);
             }
         }
